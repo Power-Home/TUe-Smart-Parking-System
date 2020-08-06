@@ -1,0 +1,20 @@
+server:
+  port: 9005
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.31.111:8848
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/parking?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: root
+  thymeleaf:
+    mode: HTML
+    suffix: .html
+    encoding: UTF-8
+    cache: false
+    servlet:
+      content-type: text/html; charset=utf-8

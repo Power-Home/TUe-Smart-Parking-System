@@ -1,0 +1,136 @@
+package com.hompan.tueparking.pre2.controller;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.hompan.tueparking.pre2.pojo.Plot;
+import com.hompan.tueparking.pre2.pojo.Record;
+import com.hompan.tueparking.pre2.pojo.Seat;
+import com.hompan.tueparking.pre2.service.BSeatService;
+import com.hompan.tueparking.pre2.service.PlotService;
+import com.hompan.tueparking.pre2.service.RecordService;
+import com.hompan.tueparking.pre2.service.SeatService;
+import com.hompan.tueparking.pre2.util.TimeUtil;
+
+@Controller
+@ResponseBody
+public class RecordController {
+
+	@Autowired
+	RecordService recordService;
+	@Autowired
+	SeatService seatService;
+	@Autowired
+	PlotService plotService;
+	@Autowired
+	BSeatService bseatService;
+
+	/**
+	 * 进场
+	 * @param inMap
+	 * @return
+	 */
+	@PostMapping("/start")
+	public Map<String, Object> beginParking(@RequestBody HashMap<String, Object> inMap) {
+		Map<String, Object> map = recordService.startParking(inMap,0);
+		return map;
+	}
+
+	/**
+	 * 当前用户正在停车
+	 * 
+	 * @param userid
+	 * @return
+	 */
+	@GetMapping("/{userid}/currentRecord")
+	public Map<String, Object> getNowRecord(@PathVariable int userid) {
+		Record r = recordService.nowRecord(userid);
+		Map<String, Object> map = new HashMap<>();
+
+		// 已经停留时间
+		long nowtime = System.currentTimeMillis();
+		String pTime = TimeUtil.dateDiff(r.getCreatetime(), nowtime, 1);
+		map.put("parkTime", pTime);
+		// 停车场名字与泊位名
+		if (r.getSeatid() != 0) {
+			Seat seat = seatService.getSeat(r.getSeatid());
+			Plot plot = plotService.getPlot(seat.getParkingid());
+			r.setPlot(plot);
+			r.setSeat(seat);
+			// 临时计算车费
+			double m = plot.getCharge();
+
+			int freeTime = plot.getFreetime();
+			int minute = Integer.parseInt(TimeUtil.dateDiff(r.getCreatetime(), nowtime, 3));
+			int time = (minute - freeTime) > 0 ? minute - freeTime : 0;
+
+			double tempMoney = m * time / 60.0;
+			double get_double = Double.parseDouble(String.format("%.2f", tempMoney));
+
+			map.put("tempMoney", get_double);
+		}
+		map.put("record", r);
+		return map;
+	}
+
+	/**
+	 * 获取出场按钮次数
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@GetMapping("/buttonCount")
+	public int getButtonNum(@RequestParam("recordid") int id) {
+		return recordService.getButtonNum(id);
+	}
+	
+	
+	/**
+	 * 出场请求处理，开门
+	 * @param userid
+	 * @return
+	 */
+	@PostMapping("/{userid}/end")
+	public boolean openForEnd(@PathVariable("userid")int userid) {
+		//修改停车记录，endtime，button
+		long endtime = System.currentTimeMillis();
+		return recordService.changeEnd(userid,endtime,-1);
+	}
+	
+	/**
+	 * 停车场记录列表
+	 * @return
+	 */
+	@GetMapping("/myRecordList")
+	public List<Record> getMyRecord(@RequestParam("userid") int userid){
+		
+		return recordService.getRecordList(userid);
+	}
+	
+	
+	/**
+	 * 预约--进场
+	 * @param inMap
+	 * @return
+	 */
+	@PostMapping("/startforbook")
+	public Map<String, Object> beginParkingforBook(@RequestBody HashMap<String, Object> inMap) {
+	
+		int seatid = Integer.parseInt((String)inMap.get("seatid"));		
+		Map<String, Object> map = recordService.startParking(inMap,seatid);
+		int id = Integer.parseInt((String)inMap.get("id"));
+		//去除预约条目
+		bseatService.cancel(id);
+		return map;
+	}
+}

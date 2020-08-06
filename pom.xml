@@ -10,12 +10,15 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>tueparking-coupon</module>
+        <module>tueparking-pre2</module>
         <module>tueparking-member</module>
         <module>tueparking-parkingspace</module>
         <module>tueparking-transaction</module>
         <module>tueparking-ware</module>
+        <module>renren-fast</module>
+        <module>renren-generator</module>
+        <module>tueparking-common</module>
+        <module>tueparking-gateway</module>
     </modules>
-
 
 </project>
