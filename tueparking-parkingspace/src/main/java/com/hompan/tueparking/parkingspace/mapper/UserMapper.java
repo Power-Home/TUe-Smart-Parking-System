@@ -14,7 +14,7 @@ import com.hompan.tueparking.parkingspace.entity.User;
 public interface UserMapper {
 	
 	//新增
-	@Insert("insert into user(tel,passwd,name,platenumber,identity) values(#{tel},#{passwd},#{name},#{platenumber},#{identity})")
+	@Insert("insert into user(tel,email,passwd,name,platenumber,identity) values(#{tel},#{email},#{passwd},#{name},#{platenumber},#{identity})")
 	public boolean create(User u);
 	
 	/**查询**/

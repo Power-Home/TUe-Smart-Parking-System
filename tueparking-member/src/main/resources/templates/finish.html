@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>finish</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!--引入 element-ui 的样式，-->
+    <link rel="stylesheet" href="JS/element/index.css">
+    <!-- 必须先引入vue，  后使用element-ui -->
+    <script src="JS/vue/vue.js"></script>
+    <!-- 引入element 的组件库-->
+    <script src="JS/element/index.js"></script>
+
+    <!-- axios -->
+    <script src="JS/axios/axios.min.js"></script>
+
+    <!-- jquery -->
+    <script src="JS/jq/jquery-3.3.1.min.js"></script>
+
+    <style>
+        .footer {
+            position: fixed;
+            left: 0px;
+            bottom: 0px;
+            width: 100%;
+            height: 10%;
+            background-color: #eee;
+            z-index: 9999;
+        }
+
+        .con {
+            position: unset;
+            width: 50%;
+            height: 100%;
+            color: slategrey;
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+        .cen {
+            position: unset;
+            width: 400px;
+            height: 500px;
+            text-align: center;
+            font-size: 1.4em;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <!-- Nav tabs 导航栏-->
+        <div>
+
+            <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+                <a class="navbar-brand " href="/foruser">智能停车平台</a>
+                <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse"
+                    data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavId">
+
+                    <form class="form-inline my-2 my-lg-0" action="/main">
+
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">退出</button>
+                    </form>
+                </div>
+            </nav>
+        </div>
+
+        <!-- 主体功能栏 -->
+        <div>
+           
+
+            <!-- 停车ing -->
+            <div style="margin: 20%;padding-left: 15%;padding-top: 15%;">
+                <h3>本次订单已完成！查看订单点击<a href="/my">我的订单</a></h3>
+            </div>
+        </div>
+        <!-- 底部功能栏 -->
+        <div class="footer">
+            <el-row>
+                <div class="footer">
+                    
+                    <el-col :span="12" class="con">
+
+                        <span class="el-icon-place"></span>
+
+                        <div class="grid-content bg-purple" style="text-align: center;">在停</div>
+                    </el-col>
+                    <el-col :span="12" class="con">
+                        <span class="el-icon-user"></span>
+                        <div class="grid-content bg-purple-light">我的</div>
+                    </el-col>
+            </el-row>
+
+
+        </div>
+    </div></div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+
+                ss: '',
+                name: '',
+                tel: '',
+                platenumber: '',
+                id: '',
+                value: '',
+                pnumber2: '',
+                activeNames: ['1'],
+                plots: {},
+                address1: '',
+                name1: '',
+                left: '',
+                currentPage: 1,
+                total: 0,
+                pagesize: 10,
+                plist: {},
+                plotId: '',
+                orderid:0,
+            },
+            methods: {
+               
+
+            },
+            computed: {
+
+            },
+            mounted() {
+
+                var name = localStorage.getItem("name");
+                var tel = localStorage.getItem("tel");
+                var platenumber = localStorage.getItem("platenumber");
+                var id = localStorage.getItem("id");
+                this.tel = tel;
+                this.name = name;
+                this.platenumber = platenumber;
+                this.id = id;
+                this.value = platenumber.substr(0, 2);
+                this.pnumber2 = platenumber.substr(2, 5);
+                this.orderid = localStorage.getItem("orderid");
+                
+
+            },
+        })        
+    </script>
+
+
+</body>
+
+</html>

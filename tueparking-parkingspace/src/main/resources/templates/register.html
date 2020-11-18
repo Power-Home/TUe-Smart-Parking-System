@@ -267,6 +267,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="row py-1 ">
+                    <div class="col-lg-4 offset-lg-1 col-md-7  col-sm-12">
+                        <label for="">邮箱</label>
+                        <div class="form-group">
+                            <input type="text" maxlength="11" minlength="11" class="form-control" v-model="email"
+                                   placeholder="请输入您的邮箱" required />
+                        </div>
+                    </div>
+                </div>
 
                 <div class="row py-1">
                     <div class="col-lg-4 offset-lg-1 col-md-7  col-sm-12">
@@ -324,6 +333,36 @@
                     <li></li>
                     <li></li>
                     <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
         </ul>
     </div>
 
@@ -345,11 +384,12 @@
                 msg: '',
                 name: '',
                 tel: '',
+                email: '',
                 password: '',
                 platenumber: '',
                 platenumber2: '',
                 flag: false,
-                user: { id: '', tel: '', passwd: '', name: '', platenumber: '', identity: '' },
+                user: { id: '', tel: '',email:'', passwd: '', name: '', platenumber: '', identity: '' },
                 value: '粤A',
                 options: [
                     {
@@ -1423,7 +1463,7 @@
                     return
                 },
                 createUser: function () {
-                    if (this.tel == '' || this.password == '' || this.platenumber2 == '' || this.name == '') {
+                    if (this.tel == '' || this.email == ''||this.password == '' || this.platenumber2 == '' || this.name == '') {
                         this.msg = "请检查信息是否漏填！";
                     } else {
                         this.platenumber = this.value + this.platenumber2;
@@ -1433,6 +1473,7 @@
                         axios.post('/register', {
                             name: this.name,
                             tel: this.tel,
+                            email: this.email,
                             passwd: this.password,
                             platenumber:  this.platenumber,
                             identity: 1
@@ -1465,6 +1506,7 @@
                 saveStorage: function () {                   
                     localStorage.setItem("name", this.name);
                     localStorage.setItem("tel",this.tel);
+                    localStorage.setItem("email",this.email);
                     localStorage.setItem("password", this.password);
                     localStorage.setItem("platenumber", this.platenumber);
                     localStorage.setItem("id",this.user.id);

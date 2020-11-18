@@ -10,6 +10,7 @@ import com.hompan.tueparking.parkingspace.entity.Record;
 import com.hompan.tueparking.parkingspace.service.BSeatService;
 import com.hompan.tueparking.parkingspace.service.OrderService;
 import com.hompan.tueparking.parkingspace.service.RecordService;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class PathController {
@@ -180,6 +181,11 @@ public class PathController {
 	@RequestMapping("/managerInfo")
 	public String managerInfo() {
 		return "managerInfo";
+	}
+
+	@RequestMapping("/members")
+	public String members() {
+		return "members";
 	}
 	
 	@RequestMapping("/mplot")

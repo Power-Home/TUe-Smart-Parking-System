@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.rabbit.annotation.RabbitListeners;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -70,10 +72,10 @@ public class PlotService {
 	 * @param type 1加一，-1减一
 	 * @return
 	 */
+//	@RabbitListener(queues = "tueparking.member")
 	public boolean changeLeftSeats(int plotid,int type) {
 //		int leftSeats = plotMapper.getLeftSeats(plotid);
 		return plotMapper.changeLeftSeats(plotid,type);
-		
 	}
 
 	public boolean delete(int id) {

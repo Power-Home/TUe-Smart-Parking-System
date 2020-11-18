@@ -5,7 +5,10 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.hompan.tueparking.parkingspace.mapper.UserMapper;
@@ -23,6 +26,8 @@ public class UserService {
 	
 	@Autowired
 	UserMapper userMapper;
+	@Autowired
+	RabbitTemplate rabbitTemplate;
 	
 	/**
 	 * 注册新用户
@@ -51,6 +56,9 @@ public class UserService {
 				map.put("state", 1);
 				map.put("msg", "注册成功！");
 				map.put("user", u);
+
+				rabbitTemplate.convertAndSend("exchange.direct","tueparking.member",map);
+				System.out.println("rabbitMq注册信息已发送: "+map);
 
 			} else {
 				map.put("state", 2);
@@ -94,6 +102,7 @@ public class UserService {
 	 * @param u
 	 * @return
 	 */
+	@CachePut(cacheNames = {"user"},unless = "#result == null")
 	public Map<String, Object> changeUserInfo(User u) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String tel = userMapper.findById(u.getId()).getTel();
@@ -139,6 +148,7 @@ public class UserService {
 	 * @param id
 	 * @return
 	 */
+	@Cacheable(cacheNames = {"user"},unless = "#result == null")
 	public User getUser(int id) {
 		User u = userMapper.findById(id);
 		return u;

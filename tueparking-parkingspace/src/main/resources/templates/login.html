@@ -291,18 +291,7 @@
 			        <li></li>
 			        <li></li>
 			        <li></li>
-			        <li></li>
-			        <li></li>
-					<li></li>
-			        <li></li>
-			        <li></li>
-			        <li></li>
-			        <li></li>
-			        <li></li>
-			        <li></li>
-			        <li></li>
-			        <li></li>
-			        <li></li>
+
 
 		</ul>
 	</div>
@@ -324,6 +313,7 @@
 				state: '',
 				msg: '',
 				tel: '',
+				email: '',
 				password: '',
 				user: { id: '', tel: '', passwd: '', name: '', platenumber: '', identity: '' }
 			},
@@ -360,6 +350,7 @@
 				saveStorage: function () {
 					localStorage.setItem("name", this.user.name);
 					localStorage.setItem("tel", this.tel);
+					localStorage.setItem("email", this.email);
 					localStorage.setItem("password", this.password);
 					localStorage.setItem("platenumber", this.user.platenumber);
 					localStorage.setItem("id",this.user.id);

@@ -17,6 +17,7 @@ public class Plot {
 	private String name;
 	private String address;
 	private int tel;
+	private int email;
 	private int totalparkinglot;
 	private int leftparkinglot;
 	private double charge;//收费  元/分钟

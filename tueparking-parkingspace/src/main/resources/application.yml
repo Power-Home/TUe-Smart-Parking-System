@@ -5,7 +5,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 192.168.31.111:8848
+        server-addr: 192.168.88.245:8848
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/parking?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
@@ -20,3 +20,19 @@ spring:
       content-type: text/html; charset=utf-8
   application:
     name: tueparking-parkingspace
+  redis:
+    host: 34.91.17.126
+    port: 6379
+  rabbitmq:
+    host: 34.91.17.126
+    username: guest
+    password: guest
+  mail:
+    username: 844279044@qq.com
+    password: ckqaupcwczexbfef
+    host: smtp.qq.com
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true

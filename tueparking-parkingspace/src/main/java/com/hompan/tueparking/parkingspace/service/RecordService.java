@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,8 @@ public class RecordService {
 	SeatService seatService;
 	@Autowired
 	PlotService plotService;
+	@Autowired
+	RabbitTemplate rabbitTemplate;
 		
 	public Map<String,Object> startParking(HashMap<String,Object> map,int seatid){
 		long createtime = Long.valueOf(String.valueOf(map.get("createtime"))).longValue();
@@ -53,7 +56,15 @@ public class RecordService {
 				out.put("orderid", order2.getId());
 				out.put("state", 1);
 				out.put("msg", "生成新订单成功");
-				
+
+				//将生成记录发到单播消息队列中
+				Map<String,Object> eMap = new HashMap<>();
+				eMap.put("orderid", order2.getId());
+				eMap.put("state", 1);
+				eMap.put("msg", "生成新订单成功");
+				eMap.put("userid",userid);
+				rabbitTemplate.convertAndSend("exchange.direct","tueparking.member",eMap);
+				System.out.println("rabbitMq停车信息已发送: "+eMap);
 			}else {
 				out.put("state", 2);
 				out.put("msg", "生成新订单失败");
@@ -94,7 +105,7 @@ public class RecordService {
 	 * 出场修改停车记录参数
 	 * @param userid
 	 * @param endtime
-	 * @param i
+	 * @param
 	 * @return
 	 */
 	public boolean changeEnd(int userid, long endtime, int num) {
