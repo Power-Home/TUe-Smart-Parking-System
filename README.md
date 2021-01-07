@@ -4,7 +4,7 @@
 This project is part of TU/e 2IMN10 Architecture of distributed systems course project and friendly to users of springboot and microservices.
 <br>
 <br>
-Parking Service (Version: 1.0) ● Language: Java ● Framework: Spring Boot ● Spring Module: Web MVC modules(Rest) ● Skills Required: Core Java + Spring Boot + openfeign + nacos + Rest API Development
+Parking Service (Version: 3.2.1) ● Language: Java ● Framework: Spring Boot ● Spring Module: Web MVC modules(Rest) ● Skills Required: Core Java + Spring Boot + openfeign + nacos + Rest API Development
 <br>
 <br>
 
