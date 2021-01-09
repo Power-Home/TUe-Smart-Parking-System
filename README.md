@@ -8,7 +8,7 @@ Parking Service (Version: 3.2.1) ● Language: Java ● Framework: Spring Boot �
 <br>
 <br>
 
-**Please note that this demo is the early version and only show the general idea of this parking system, which means it is NOT the actual project itself.**
+**Please note that this demo is the early version and only show the general idea of this parking system, which means it is NOT the actual project itself. You need to optimize this system in your own way based on the existing work.**
 
 <br>
 
