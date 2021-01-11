@@ -2,10 +2,10 @@ server:
   port: 9005
 
 spring:
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 192.168.88.245:8848
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: 192.168.88.245:8848
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/parking?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8

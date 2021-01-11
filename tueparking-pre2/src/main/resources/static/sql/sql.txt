@@ -124,7 +124,7 @@ CREATE TABLE `user` (
 
 /*Data for the table `user` */
 
-insert  into `user`(`id`,`tel`,`passwd`,`name`,`platenumber`,`identity`,`comid`) values (1,'13217489796','4QrcOUm6Wau+VuBX8g+IPg==','xxm','LM8888',1,NULL),(2,'18819201998','4QrcOUm6Wau+VuBX8g+IPg==','MIN',NULL,2,'C0001'),(3,'17512359650','4QrcOUm6Wau+VuBX8g+IPg==','snake12','粤AB1111',1,NULL),(6,'14566224555','4QrcOUm6Wau+VuBX8g+IPg==','251','粤A24554',1,NULL),(7,'18819201000','4QrcOUm6Wau+VuBX8g+IPg==','夏尔','粤A11111',1,NULL);
+insert  into `user`(`id`,`tel`,`passwd`,`name`,`platenumber`,`identity`,`comid`) values (1,'13217489796','4QrcOUm6Wau+VuBX8g+IPg==','hompan','LM8888',1,NULL),(2,'18819201998','4QrcOUm6Wau+VuBX8g+IPg==','MIN',NULL,2,'C0001'),(3,'17512359650','4QrcOUm6Wau+VuBX8g+IPg==','snake12','粤AB1111',1,NULL),(6,'14566224555','4QrcOUm6Wau+VuBX8g+IPg==','251','粤A24554',1,NULL),(7,'18819201000','4QrcOUm6Wau+VuBX8g+IPg==','夏尔','粤A11111',1,NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

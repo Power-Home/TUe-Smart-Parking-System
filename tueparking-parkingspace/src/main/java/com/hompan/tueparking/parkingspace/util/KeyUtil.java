@@ -6,7 +6,7 @@ import org.springframework.util.DigestUtils;
 /**
  * 加密工具类
  * 
- * @author 许晓敏
+ * @author homer
  *
  */
 public class KeyUtil {
